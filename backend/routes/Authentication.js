@@ -25,12 +25,10 @@ router.post('/sign-in', inputValidation, async (req, res) => {
     const username = req.body.username;
 
     const result = await TodoApp.findOne({ username, password });
-    if (result) return res.json({ message: "user Exists", value: true });
-    // here we are going to return the jwt 
-    
-    return res.json({ message: "user doesn't exists", value: false, 
-        authorization:  jwt.sign({username, expiry: Date.now() + 3600},secreatKey) }); 
-        // means the session will be only for 
+    if (result) return res.json({ message: "user Exists", value: true , 
+        "authorization":  jwt.sign({username, expiry: Date.now() + (3600*1000)},secreatKey)});
+  
+    return res.json({ message: "user doesn't exists", value: false }); 
 
 });
 
