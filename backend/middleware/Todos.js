@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken') ;
 const {secreatKey} = require('../config') ;
 const {z} = require('zod') ;
 const TodoApp = require('../db/Todos') ;
+const objectID = require('mongoose').Types.ObjectId ;
 
 async function authorizationCheck(req,res,next){
     try{
@@ -38,8 +39,14 @@ async function usernameCheck(req,res,next){
     return res.status(404).json({"message": "user not found", value: false})
 }
 
+async function ObjecIdCheck(req,res,next){
+    // here we are checking whether the objectID was correct or not
+    if(objectID.isValid(req.params.todoId)) return next() ;
+    return res.status(400).json({"message": "invalid todo id", "value": false})
+} 
 
 
 
 
-module.exports = {todoCheck, authorizationCheck, usernameCheck} ;
+
+module.exports = {todoCheck, authorizationCheck, usernameCheck,ObjecIdCheck} ;
