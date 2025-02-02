@@ -10,14 +10,14 @@ function Authentication(){
     const [mail, setMail] = useState("") ;
     const [username, setUsername] = useState("") ;
     const [password, setPassword]= useState("") ;
-    const [username_, setUsername_] = useState(localStorage.getItem("username")) ;
+    const [authorization, setAuthorization] = useState(localStorage.getItem("authorization")) ;
     const navigate = useNavigate() ;
 
     useEffect(() => {
-        if(username_){
+        if(authorization){
             navigate('/') ;
         }
-    },[username_]) ;
+    },[authorization]) ;
 
     const emailValidation = useCallback(() => {
         if(inOrUp) return true ;
@@ -30,9 +30,37 @@ function Authentication(){
 
     const usernameValidation = useCallback(() => {
         return z.string().min(3).max(18).safeParse(username).success ;
+    }) ;
+
+
+
+    const showSuccess = useCallback((success) => {
+        
+            toast.success("✅ "+success, {
+              position: "top-center",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              theme: "dark",
+              style: {
+                border: "2px solid #0ff",
+                backgroundColor: "#111",
+                color: "white",
+                boxShadow: "0 0 15px #0ff",
+              },
+              progressStyle: {
+                background: "#0ff", // Neon cyan progress bar
+              },
+              icon: "⚡", // Custom neon icon
+            });
+          
     })
 
+
     const showError = useCallback((error) => {
+        error = "⚠️ " + error
         toast.error(error, {
             position: "top-center", // Center at the top
             autoClose: 3000,
@@ -64,8 +92,8 @@ function Authentication(){
 
                         console.log(result.data.message) ;
                         if(result.data.value) {
-                            localStorage.setItem("username", username) ;
-                            navigate('/') ;
+                            localStorage.setItem("authorization", result.data.authorization) ;
+                            setAuthorization(result.data.authorization) ;
                         }else{
                             showError(result.data.message) ;
                         }
@@ -76,8 +104,8 @@ function Authentication(){
                         }) ;
                         console.log(result.data.message) ;
                         if(result.data.value){
-                            localStorage.setItem("username", username) ;
-                            navigate('/') ;
+                            setUp(true) ;
+                            showSuccess("Sign In Now") ;
                         }else{
                             showError(result.data.message) ;
                         }
