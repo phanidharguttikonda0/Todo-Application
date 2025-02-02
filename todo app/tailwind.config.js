@@ -5,7 +5,11 @@ export default {
       "./src/**/*.{js,ts,jsx,tsx}",
     ],
     theme: {
-      extend: {},
+      extend: {
+        fontFamily: {
+          sans: ['Georgia', 'serif'], // Set Georgia as the default font
+        },
+      },
     },
     plugins: [],
   }
