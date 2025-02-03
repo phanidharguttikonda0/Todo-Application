@@ -51,7 +51,7 @@ export default function Home() {
             }
         }).then((result) => setCurrentTodos(result.data.value)).catch((err) => {
             if(err.status === 403){
-                localStorage.removeItem("authentication")
+                localStorage.removeItem("authorization")
                 navigate('/authentication')
             }
         });
@@ -69,7 +69,7 @@ export default function Home() {
         }).catch(err => {console.log(err)
 
             if(err.status === 403){
-                localStorage.removeItem("authentication")
+                localStorage.removeItem("authorization")
                 navigate('/authentication')
             }
 
@@ -87,7 +87,7 @@ export default function Home() {
                         <Nav />
                         <div className="flex justify-start items-center w-[100%] h-[95vh]">
                             <SideNav />
-                            <div className="p-6 bg-[#1a2332] text-white ml-[5%] mt-[2%] mb-[1%] mr-[2%]">
+                            <div className="p-6 w-[100%] bg-[#1a2332] text-white ml-[5%] mt-[2%] mb-[1%] mr-[2%] flex justify-center items-center">
                                 <Outlet />
                             </div>
                         </div>
