@@ -1,0 +1,19 @@
+
+.btn{
+    @apply bg-Blue-500 p-3 rounded-lg items-center
+}
+
+.btn-text{
+    @apply bg-slate-100 font-bold 
+}
+
+.primary-text{
+    @apply bg-slate-100
+}
+
+.secondary-text{
+    @apply bg-slate-400 /* for placeholders , descriptions, start time , end time etc */
+}
+
+
+
