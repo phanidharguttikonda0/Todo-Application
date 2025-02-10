@@ -1,20 +1,28 @@
 import React from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation,useRoute } from "@react-navigation/native";
+import { useRecoilValue } from "recoil";
+import { viaAuthenticationAtom } from "./state/Basic";
 
 const CustomTabBar = ({ state }) => {
   const navigation = useNavigation();
-  
+  const viaAuthentication = useRecoilValue(viaAuthenticationAtom) ;
+  const route = useRoute();
   const icons = {
     HomeTodos: "home",
     CompletedTodos: "checkmark-done",
     AddTodo: "add-circle",
     Profile: "person",
   };
-
-  return (
-    <View style={styles.Tab}>
+  console.log(`via authentication ${viaAuthentication}`)
+  return ( 
+    <View  style={[
+      styles.Tab,
+      { 
+        bottom: viaAuthentication ? 23 : 0, // Adjust dynamically
+      },
+    ]}>
         <View style={styles.container}>
       {state.routes.map((route, index) => (
         
@@ -39,7 +47,6 @@ const CustomTabBar = ({ state }) => {
 const styles = StyleSheet.create({
     Tab: {
         position: 'absolute',
-        bottom: 23,
         left: 0,
         right: 0,   
         backgroundColor: '#1e293b',    

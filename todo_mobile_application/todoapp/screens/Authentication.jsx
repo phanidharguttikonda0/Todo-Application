@@ -75,12 +75,7 @@ export default function Authentication({navigation}){
     }
 
 
-    useEffect(() => {
-        async function main(){
-            console.log(`The check was ${await SecureStore.getItemAsync('authorization')}`)
-            if(await SecureStore.getItemAsync('authorization')) navigation.navigate('Home')
-        }main()
-    },[])
+    
     
  
    

@@ -1,6 +1,5 @@
 
 import { View, StyleSheet, FlatList, Text,SafeAreaView } from "react-native"
-import styles_ from './styles';
 import data from "./data";
 import Todo from "./Todo";
 import { styles } from "./styles";
